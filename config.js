@@ -1,18 +1,18 @@
 // The Server IP should be in exports.server and the port should be in exports.port
-exports.server = '107.161.19.92';
-exports.port = 8000;
+exports.server = 'lotus.kota.moe';
+exports.port = 80;
 
 // The Server ID. Example for play.pokemonshowdown.com the server id will be "showdown"
-exports.serverid = 'infinite';
+exports.serverid = 'eos';
 
 
 // The Bots name should go in exports.nick and password in exports.pass
-exports.nick = '1nside';
-exports.pass = 'botofinferno';
+exports.nick = 'Bot of Sky';
+exports.pass = 'aaaaaa';
 
 
 // The rooms that should be joined. Joining Pokemon Showdown's Lobby isnt allowed at all..
-exports.rooms = ['The Razor League','The Inferno League'];
+exports.rooms = ['earth','theallianceempire','ktnleague'];
 
 
 // Any private rooms that should be joined.
@@ -22,11 +22,11 @@ exports.privaterooms = [];
 // Note that using / and ! might be 'dangerous' since these are used in
 // Showdown itself.
 // Using only alphanumeric characters and spaces is not allowed.
-exports.commandcharacter = '.';
+exports.commandcharacter = '*';
 
 // The default rank is the minimum rank that can use a command in a room when
 // no rank is specified in settings.json
-exports.defaultrank = '%';
+exports.defaultrank = '+';
 
 // Whether this file should be watched for changes or not.
 // If you change this option, the server has to be restarted in order for it to
@@ -48,10 +48,10 @@ exports.debuglevel = 3;
 
 // Users who can use all commands regardless of their rank. Be very cautious
 // with this, especially on servers other than main.
-exports.excepts = [];
+exports.excepts = ['alliancesky'];
 
 // Whitelisted users are those who the bot will not enforce moderation for.
-exports.whitelist = [];
+exports.whitelist = ['alliancesky'];
 
 // Users in this list can use the regex autoban commands. Only add users who know how to write regular expressions and have your complete trust not to abuse the commands.
 exports.regexautobanwhitelist = [];
