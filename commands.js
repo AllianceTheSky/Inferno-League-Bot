@@ -3,7 +3,7 @@
  *
  * @license MIT license
  */
-const MESSAGES_TIME_OUT = 7 * 24 * 60 * 60 * 1000;
+const MESSAGES_TIME_OUT = 7 * 24 * 60 * 60 * 100;
 
 var http = require('http');
 var sys = require('sys');
@@ -877,7 +877,7 @@ exports.commands = {
 				this.say(room, '' + by.slice(1, by.length) + ' got the right answer, and has ' + anagramPoints[anagramPoints.indexOf(user) + 1] + ' points!');
 			} else {
 				anagramA = '';
-				anagramPoints[triviaPoints.length] = user;
+				anagramPoints[anagramPoints.length] = user;
 				anagramPoints[anagramPoints.length] = 1;
 				this.say(room, '' + by.slice(1, by.length) + ' got the right answer, and has ' + anagramPoints[anagramPoints.indexOf(user) + 1] + ' point!');
 			}
@@ -885,9 +885,9 @@ exports.commands = {
 	},
 	anagramend: function(arg, by, room){
 		if(room !== anagramRoom)return false;
-		if(!triviaON) return false;
+		if(!anagramON) return false;
 		if(!this.hasRank(by, '%@#~'))return false;
-		clearInterval(triviaTimer);
+		clearInterval(anagramTimer);
 		this.say(room, 'The game of anagram has been ended.');
 		anagramON = false;
 	},
