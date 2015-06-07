@@ -26,7 +26,7 @@ var anagramTimer;
 var anagramA;
 var anagramQ;
 var anagramPoints = [];
-var anagramQuestions = ['<b>lbzae | Abilities</b>', 'blaze', '<b>btuhonletr | Moves</b>', 'thunderbolt', '<b>sbroelamr | Moves</b>', 'solarbeam','<b>udlkparsue | Moves</b>','darkpulse','<b>iaetrae | Abilities</b>','aerilate','<b>ynrtaiar | Pokemon</b>','tyranitar,'<b>mdaertrcooe | Moves</b>'.'dracometeor', '<b>twomew | Pokemon</b>','mewtwo','<b>oftauke</b>','<b>bogdorra | Pokemon</b>','garbodor','<b>byltaiccknhro | City/Town</b>','blackthorncity','<b>pmiengsair | Pokemon</b>','megapinsir','<b>ncmbiastay | City/Town</b>','nimbasacity','<b>ningreja | Pokemon</b>,'greninja','<b>teanpro | Abilities</b>','protean','<b>czhaard | Pokemon</b>','charizard'];
+var anagramQuestions = ['lbzae','blaze','btuhonletr','thunderbolt','sbroelamr','solarbeam','udlkparsue','darkpulse','iaetrae','aerilate','ynrtaiar','tyranitar','mdaertrcooe','dracometeor','twomew','mewtwo','oftauke','fakeout','bogdorra','garbodor','byltaiccknhro','blackthorncity','pmiengsair','megapinsir','ncmbiastay','nimbasacity','ningreja,'greninja','teanpro','protean','czhaard','charizard'];
 
 
 exports.commands = {
