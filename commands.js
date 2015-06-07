@@ -26,7 +26,7 @@ var anagramTimer;
 var anagramA;
 var anagramQ;
 var anagramPoints = [];
-var anagramQuestions = ['lbzae','blaze','btuhonletr','thunderbolt','sbroelamr','solarbeam','udlkparsue','darkpulse','iaetrae','aerilate','ynrtaiar','tyranitar','mdaertrcooe','dracometeor','twomew','mewtwo','oftauke','fakeout','bogdorra','garbodor','byltaiccknhro','blackthorncity','pmiengsair','megapinsir','ncmbiastay','nimbasacity','ningreja,'greninja','teanpro','protean','czhaard','charizard'];
+var anagramQuestions = ['lbzae', 'blaze', 'btuhonletr', 'thunderbolt', 'sbroelamr', 'solarbeam', 'udlkparsue', 'darkpulse', 'iaetrae', 'aerilate', 'ynrtaiar', 'tyranitar', 'mdaertrcooe', 'dracometeor', 'twomew','mewtwo', 'oftauke', 'fakeout', 'bogdorra', 'garbodor', 'byltaiccknhro', 'blackthorncity', 'pmiengsair', 'megapinsir', 'ncmbiastay', 'nimbasacity', 'ningreja', 'greninja', 'teanpro', 'protean', 'czhaard', 'charizard'];
 
 
 exports.commands = {
@@ -847,8 +847,8 @@ exports.commands = {
 		anagramRoom = room;
                 anagramA = '';
 		anagramPoints = [];
-		this.say( room, 'Hosting a game of anagram\. First to 10 points wins!  use \.ag or \.anagramanswer to submit your answer\.');
-		triviaTimer = setInterval( function() {
+		this.say( room, 'Hosting a game of anagram\. First to 10 points wins!  use \*ag or \*anagramanswer to submit your answer\.');
+		anagramTimer = setInterval( function() {
                         if(anagramA){this.say(room, 'The correct answer was ' + anagramA);}
 			var TQN = 2*(Math.floor(anagramQuestions.length*Math.random()/2))
 			anagramQ = anagramQuestions[TQN];
@@ -858,12 +858,12 @@ exports.commands = {
 		
 	},
 	ag: 'anagramanswer',
-	triviaanswer: function(arg, by, room){
+	anagramanswer: function(arg, by, room){
 		if(room !== AnagramRoom) return false;
 		if (!arg) return false;
 		arg = toId(arg);
 		var user = toId(by);
-	//	this.say(room, arg + ' answer: ' + triviaA);
+	//	this.say(room, arg + ' answer: ' + anagramA);
 		if(arg === anagramA){
 			if (anagramPoints.indexOf(user) > -1){
 				anagramA = '';
