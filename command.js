@@ -19,6 +19,15 @@ var triviaQuestions = ['This Pokemon helps Nurse Joy in Pokemon Center and also 
 'What Pokemon is based on the mythological kitsune?','ninetales'
 ];
 
+//A Game of Anagram. Still a bit buggy but works fine 
+var anagramON = false;
+var anagramRoom;
+var anagramTimer;
+var anagramA;
+var anagramQ;
+var anagramPoints = [];
+var anagramQuestions = ['<b>lbzae | Abilities</b>', 'blaze', '<b>btuhonletr | Moves</b>', 'thunderbolt', '<b>sbroelamr | Moves</b>', 'solarbeam','<b>udlkparsue | Moves</b>','darkpulse','<b>iaetrae | Abilities</b>','aerilate','<b>ynrtaiar | Pokemon</b>','tyranitar,'<b>mdaertrcooe | Moves</b>'.'dracometeor', '<b>twomew | Pokemon</b>','mewtwo','<b>oftauke</b>','<b>bogdorra | Pokemon</b>','garbodor','<b>byltaiccknhro | City/Town</b>','blackthorncity','<b>pmiengsair | Pokemon</b>','megapinsir','<b>ncmbiastay | City/Town</b>','nimbasacity','<b>ningreja | Pokemon</b>,'greninja','<b>teanpro | Abilities</b>','protean','<b>czhaard | Pokemon</b>','charizard'];
+
 
 exports.commands = {
 	/**
@@ -554,32 +563,6 @@ exports.commands = {
         this.say(room, "The current time is: " + today);
 	},
 	
-	//Inferno LEague Divisions. You can rename these commands to make your own custom commands
-	divisionou: 'ou',
-	ou: 'ou',
-	ou: function (arg, by, room) {
-		var text = this.hasRank(by, '+%@#&~') || room.charAt(0) === ',' ? '' : '/pm ' + by + ', ';
-		this.say(room, text + "**Inferno OU Division(Heat)**: Jayner ,  ");
-	},
-	nu: function (arg, by, room) {
-		var text = this.hasRank(by, '%@#&~') || room.charAt(0) === ',' ? '' : '/pm ' + by + ', ';
-		this.say(room, text + '**Inferno NU Division(Flame)**: ');
-	},
-	ru: function (arg, by, room) {
-		var text = this.hasRank(by, '+%@#&~') || room.charAt(0) === ',' ? '' : '/pm ' + by + ', ';
-		this.say(room, text + '**Inferno RU division(Burn)**: ');
-	},
-	divisionuu: 'uu',
-	uu: 'uu',
-	uu: function (arg, by, room) {
-		var text = this.hasRank(by, '+%@#&~') || room.charAt(0) === ',' ? '' : '/pm ' + by + ', ';
-		this.say(room, text + '**Inferno UU Division(Lava)**: ');
-	},
-	ubers: function (arg, by, room) {
-		var text = this.hasRank(by, '+%@#&~') || room.charAt(0) === ',' ? '' : '/pm ' + by + ', ';
-		this.say(room, text + '**Inferno Ubers division(Blaze)**: ');
-	},
-
 //Trying to Fix this command a bit. A bit buggy but works fine
 	announce: function (arg, by, room) {
 		if (!this.hasRank(by, '%@#&~')) return false;
@@ -828,8 +811,8 @@ exports.commands = {
 				this.say(room, '' + by.slice(1, by.length) + ' got the right answer, and has ' + triviaPoints[triviaPoints.indexOf(user) + 1] + ' points!');
 			} else {
 				triviaA = '';
-				triviaPoints[triviaPoints.length] = user;
-				triviaPoints[triviaPoints.length] = 1;
+				triviaPoints[anagramPoints.length] = user;
+				triviaPoints[anagramPoints.length] = 1;
 				this.say(room, '' + by.slice(1, by.length) + ' got the right answer, and has ' + triviaPoints[triviaPoints.indexOf(user) + 1] + ' point!');
 			}
 		}
@@ -838,9 +821,75 @@ exports.commands = {
 		if(room !== triviaRoom)return false;
 		if(!triviaON) return false;
 		if(!this.hasRank(by, '%@#~'))return false;
-		clearInterval(triviaTimer);
+		clearInterval(teiviaTimer);
 		this.say(room, 'The game of trivia has been ended.');
 		triviaON = false;
+	},
+};
+
+	//Trivia commands are HERE :D
+	anagrampoints: function(arg, by, room){
+		if(!anagramON) return false;
+		if(!this.hasRank(by, '%#@~'))return false;
+		var text = 'Points so far: '
+		for (var i = 0; i < anagramPoints.length; i++){
+			text += '' + anagramPoints[i] + ': ';
+			text += anagramPoints[i + 1] + ' points, ';
+			i++
+		}
+		this.say(room, text);
+	},
+        anagram: function(arg, by, room){
+		if(room.charAt(',') === 0)return false;
+		if(!this.hasRank(by, '%@#~')) return false;
+		if(anagramON){this.say( room, 'A anagram game cannot be started, as it is going on in another room.'); return false;}
+		anagramON = true;
+		anagramRoom = room;
+                anagramA = '';
+		anagramPoints = [];
+		this.say( room, 'Hosting a game of anagram\. First to 10 points wins!  use \.ag or \.anagramanswer to submit your answer\.');
+		triviaTimer = setInterval( function() {
+                        if(anagramA){this.say(room, 'The correct answer was ' + anagramA);}
+			var TQN = 2*(Math.floor(anagramQuestions.length*Math.random()/2))
+			anagramQ = anagramQuestions[TQN];
+			anagramA = anagramQuestions[TQN+ 1];
+			this.say( room, 'Question: __' + anagramQ + '__'); 
+		}.bind(this), 17000);
+		
+	},
+	ag: 'anagramanswer',
+	triviaanswer: function(arg, by, room){
+		if(room !== AnagramRoom) return false;
+		if (!arg) return false;
+		arg = toId(arg);
+		var user = toId(by);
+	//	this.say(room, arg + ' answer: ' + triviaA);
+		if(arg === anagramA){
+			if (anagramPoints.indexOf(user) > -1){
+				anagramA = '';
+				anagramPoints[anagramPoints.indexOf(user) + 1] = anagramPoints[anagramPoints.indexOf(user) + 1] + 1;
+				if (anagramPoints[anagramPoints.indexOf(user) + 1] >= 10) {
+					clearInterval(anagramTimer);
+					this.say( room, 'Congrats to ' + by + ' for winning!');
+					anagramON = false;
+					return false;
+				}
+				this.say(room, '' + by.slice(1, by.length) + ' got the right answer, and has ' + anagramPoints[anagramPoints.indexOf(user) + 1] + ' points!');
+			} else {
+				anagramA = '';
+				anagramPoints[triviaPoints.length] = user;
+				anagramPoints[anagramPoints.length] = 1;
+				this.say(room, '' + by.slice(1, by.length) + ' got the right answer, and has ' + anagramPoints[anagramPoints.indexOf(user) + 1] + ' point!');
+			}
+		}
+	},
+	anagramend: function(arg, by, room){
+		if(room !== anagramRoom)return false;
+		if(!triviaON) return false;
+		if(!this.hasRank(by, '%@#~'))return false;
+		clearInterval(triviaTimer);
+		this.say(room, 'The game of anagram has been ended.');
+		anagramON = false;
 	},
 };
 
