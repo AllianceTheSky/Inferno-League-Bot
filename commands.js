@@ -3,7 +3,7 @@
  *
  * @license MIT license
  */
-const MESSAGES_TIME_OUT = 7 * 24 * 60 * 60 * 100;
+const MESSAGES_TIME_OUT = 7 * 24 * 60 * 60 * 1000;
 
 var http = require('http');
 var sys = require('sys');
